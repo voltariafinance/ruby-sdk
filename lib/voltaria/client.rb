@@ -31,6 +31,11 @@ module Voltaria
       @accounts ||= Voltaria::Accounts::Client.new(client: @raw_client)
     end
 
+    # @return [Voltaria::Collections::Client]
+    def collections
+      @collections ||= Voltaria::Collections::Client.new(client: @raw_client)
+    end
+
     # @return [Voltaria::Documents::Client]
     def documents
       @documents ||= Voltaria::Documents::Client.new(client: @raw_client)

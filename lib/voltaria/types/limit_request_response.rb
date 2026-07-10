@@ -10,6 +10,7 @@ module Voltaria
       field :reason, -> { String }, optional: false, nullable: false
       field :response, -> { String }, optional: true, nullable: false
       field :waiver_id, -> { String }, optional: true, nullable: false
+      field :source, -> { Voltaria::Types::LimitRequestSourceEnum }, optional: false, nullable: false
       field :created_at, -> { String }, optional: false, nullable: false
     end
   end

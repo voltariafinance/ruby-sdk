@@ -14,6 +14,7 @@ module Voltaria
       field :folder_path, -> { String }, optional: true, nullable: false
       field :document_date, -> { String }, optional: true, nullable: false
       field :expiry_date, -> { String }, optional: true, nullable: false
+      field :distribution_id, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: false, nullable: false
     end
   end

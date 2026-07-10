@@ -10,6 +10,124 @@ module Voltaria
         @client = client
       end
 
+      # List loan review requests for your partner account, optionally filtered by loan ID or client ID.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String, nil] :loan_id
+      # @option params [String, nil] :client_id
+      # @option params [Integer, nil] :page
+      # @option params [Integer, nil] :page_size
+      # @option params [String, nil] :order_by
+      # @option params [String, nil] :q
+      #
+      # @return [Voltaria::Types::PaginatedResponseLoanReviewRequestResponse]
+      def list_loan_review_requests(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        query_param_names = %i[loan_id client_id page page_size order_by q]
+        query_params = {}
+        query_params["loan_id"] = params[:loan_id] if params.key?(:loan_id)
+        query_params["client_id"] = params[:client_id] if params.key?(:client_id)
+        query_params["page"] = params[:page] if params.key?(:page)
+        query_params["page_size"] = params[:page_size] if params.key?(:page_size)
+        query_params["order_by"] = params[:order_by] if params.key?(:order_by)
+        query_params["q"] = params[:q] if params.key?(:q)
+        params.except(*query_param_names)
+
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v2/loans/review-requests",
+          query: query_params,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::PaginatedResponseLoanReviewRequestResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Ask Voltaria to review a not-yet-disbursed (pending or pre-approved) loan before disbursement.
+      #
+      # @param request_options [Hash]
+      # @param params [Voltaria::Loans::Types::LoanReviewRequestCreatePayload]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      #
+      # @return [Voltaria::Types::LoanReviewRequestResponse]
+      def create_loan_review_request(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "v2/loans/review-requests",
+          body: Voltaria::Loans::Types::LoanReviewRequestCreatePayload.new(params).to_h,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::LoanReviewRequestResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Retrieve a specific loan review request by its ID.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :request_id
+      #
+      # @return [Voltaria::Types::LoanReviewRequestResponse]
+      def get_loan_review_request(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v2/loans/review-requests/#{URI.encode_uri_component(params[:request_id].to_s)}",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::LoanReviewRequestResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
       # Retrieve all loans associated with your partner account. Supports optional filtering by client ID.
       #
       # @param request_options [Hash]
