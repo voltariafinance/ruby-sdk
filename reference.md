@@ -4638,6 +4638,208 @@ client.partners.list_partner_waterfalls
 </dl>
 </details>
 
+## Recoveries
+<details><summary><code>client.recoveries.<a href="/lib/voltaria/recoveries/client.rb">list_recoveries</a>() -> Voltaria::Types::PaginatedResponseRecoveryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve recoveries recorded against your loans. Supports filtering by client or loan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.recoveries.list_recoveries
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**client_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loan_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**order_by:** `String` — Field to order the results by, e.g., 'created_at:desc,updated_at:asc'
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**q:** `String` — Query string for filtering. Format: "field:operator:value;...". Supported fields: id, client_id, loan_id, currency, recovery_date, created_at. Supported operators: is, in, not_in, contains, not_contains, like, not_like, ilike, not_ilike, gt, gte, lt, lte, starts_with, ends_with, is_null, is_not_null.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Voltaria::Recoveries::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.recoveries.<a href="/lib/voltaria/recoveries/client.rb">create_recovery</a>(request) -> Voltaria::Types::RecoveryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record a new recovery against one of your loans.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.recoveries.create_recovery(
+  loan_id: "loan_abc123",
+  amount: 1.1,
+  currency: "eur",
+  recovery_date: "2026-07-15"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**loan_id:** `String` — The ID of the loan this recovery is associated with.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `Voltaria::Recoveries::Types::RecoveryCreatePayloadAmount` — The amount recovered (must be > 0).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `Voltaria::Types::CurrencyEnum` — The currency of the recovered amount, must be one of the supported currencies: eur, gbp, usd, czk, pln, isk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**recovery_date:** `String` — The date the recovery was made.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `String` — Optional notes about the recovery.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Voltaria::Recoveries::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Webhooks
 <details><summary><code>client.webhooks.<a href="/lib/voltaria/webhooks/client.rb">list_webhook_subscriptions</a>() -> Voltaria::Types::PaginatedResponseWebhookSubscriptionResponse</code></summary>
 <dl>

@@ -61,6 +61,11 @@ module Voltaria
       @partners ||= Voltaria::Partners::Client.new(client: @raw_client)
     end
 
+    # @return [Voltaria::Recoveries::Client]
+    def recoveries
+      @recoveries ||= Voltaria::Recoveries::Client.new(client: @raw_client)
+    end
+
     # @return [Voltaria::Webhooks::Client]
     def webhooks
       @webhooks ||= Voltaria::Webhooks::Client.new(client: @raw_client)
