@@ -4215,6 +4215,76 @@ client.loans.delete_loan(loan_id: "loan_id")
 </dl>
 </details>
 
+<details><summary><code>client.loans.<a href="/lib/voltaria/loans/client.rb">calculate_settlement</a>(loan_id, request) -> Voltaria::Types::EarlySettlementResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Calculate the indicative early settlement figure for a loan as of the given settlement date. The amount is indicative only, not a binding quote, and has no validity period — it changes as repayments are recorded and as the settlement date moves. Confirm the final amount with Voltaria before collecting from the borrower.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.loans.calculate_settlement(loan_id: "loan_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**loan_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**settlement_date:** `String` — Date the loan would be settled. Must be today or later. Defaults to today when omitted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Voltaria::Loans::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.loans.<a href="/lib/voltaria/loans/client.rb">create_bulk_loans</a>(request) -> Voltaria::Types::BulkLoanTaskResponse</code></summary>
 <dl>
 <dd>

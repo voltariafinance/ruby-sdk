@@ -276,6 +276,47 @@ module Voltaria
         raise error_class.new(response.body, code: code)
       end
 
+      # Calculate the indicative early settlement figure for a loan as of the given settlement date. The amount is
+      # indicative only, not a binding quote, and has no validity period — it changes as repayments are recorded and as
+      # the settlement date moves. Confirm the final amount with Voltaria before collecting from the borrower.
+      #
+      # @param request_options [Hash]
+      # @param params [Voltaria::Loans::Types::EarlySettlementPayload]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :loan_id
+      #
+      # @return [Voltaria::Types::EarlySettlementResponse]
+      def calculate_settlement(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        request_data = Voltaria::Loans::Types::EarlySettlementPayload.new(params).to_h
+        non_body_param_names = ["loan_id"]
+        body = request_data.except(*non_body_param_names)
+
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "v2/loans/#{URI.encode_uri_component(params[:loan_id].to_s)}/calculate-settlement",
+          body: body,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::EarlySettlementResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
       # Create multiple loans in a single request. Processing happens asynchronously. Returns a task ID for tracking
       # progress.
       #
