@@ -76,6 +76,11 @@ module Voltaria
       @repayments ||= Voltaria::Repayments::Client.new(client: @raw_client)
     end
 
+    # @return [Voltaria::Tasks::Client]
+    def tasks
+      @tasks ||= Voltaria::Tasks::Client.new(client: @raw_client)
+    end
+
     # @return [Voltaria::Drawdowns::Client]
     def drawdowns
       @drawdowns ||= Voltaria::Drawdowns::Client.new(client: @raw_client)
