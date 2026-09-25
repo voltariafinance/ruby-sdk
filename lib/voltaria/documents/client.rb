@@ -77,6 +77,7 @@ module Voltaria
       # @option params [String, nil] :loan_id
       # @option params [String, nil] :installment_id
       # @option params [String, nil] :waterfall_id
+      # @option params [String, nil] :task_id
       #
       # @return [Voltaria::Types::DocumentResponse]
       def upload_document(request_options: {}, **params)

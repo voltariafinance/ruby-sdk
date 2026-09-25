@@ -2295,6 +2295,14 @@ client.documents.upload_document
 <dl>
 <dd>
 
+**task_id:** `String` — The task this document answers, if any.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `Voltaria::Documents::RequestOptions` 
     
 </dd>

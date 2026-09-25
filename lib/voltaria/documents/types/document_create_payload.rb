@@ -8,6 +8,7 @@ module Voltaria
         field :loan_id, -> { String }, optional: true, nullable: false
         field :installment_id, -> { String }, optional: true, nullable: false
         field :waterfall_id, -> { String }, optional: true, nullable: false
+        field :task_id, -> { String }, optional: true, nullable: false
       end
     end
   end

@@ -8,6 +8,7 @@ module Voltaria
       ACTIVE = "active"
       IN_PROGRESS = "in_progress"
       BLOCKED = "blocked"
+      REVIEW_NEEDED = "review_needed"
       DONE = "done"
       CANCELLED = "cancelled"
     end
