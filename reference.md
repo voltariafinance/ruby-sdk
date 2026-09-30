@@ -1000,6 +1000,100 @@ client.clients.list_client_waivers(client_id: "client_id")
 </dl>
 </details>
 
+<details><summary><code>client.clients.<a href="/lib/voltaria/clients/client.rb">list_client_limits</a>(client_id) -> Voltaria::Types::PaginatedResponseClientLimitHistoryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve every credit limit granted to a specific client.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.clients.list_client_limits(client_id: "client_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**client_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**order_by:** `String` — Field to order the results by, e.g., 'created_at:desc'
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**q:** `String` — Query string for filtering. Format: "field:operator:value;...". Supported fields: id, currency, created_at, limit. Supported operators: is, in, not_in, contains, not_contains, like, not_like, ilike, not_ilike, gt, gte, lt, lte, starts_with, ends_with, is_null, is_not_null.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Voltaria::Clients::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.clients.<a href="/lib/voltaria/clients/client.rb">get_client_by_id</a>(client_id) -> Voltaria::Types::ClientResponse</code></summary>
 <dl>
 <dd>
