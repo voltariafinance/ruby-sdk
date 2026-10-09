@@ -10,6 +10,7 @@ module Voltaria
       CLIENT_UPDATED = "client.updated"
       CLIENT_LIMIT_UPDATED = "client.limit.updated"
       PARTNER_LIMIT_UPDATED = "partner.limit.updated"
+      BANK_CONNECTION_UPDATED = "bank_connection.updated"
     end
   end
 end

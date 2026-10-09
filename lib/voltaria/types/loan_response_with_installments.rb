@@ -19,6 +19,7 @@ module Voltaria
       field :payment_reference, -> { String }, optional: true, nullable: false
       field :early_settlement_date, -> { String }, optional: true, nullable: false
       field :early_settlement_amount, -> { String }, optional: true, nullable: false
+      field :repayment_method, -> { Voltaria::Types::LoanRepaymentMethodEnum }, optional: false, nullable: false
       field :data, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
       field :installments, -> { Internal::Types::Array[Voltaria::Types::LoanInstallmentResponse] }, optional: true, nullable: false
     end
