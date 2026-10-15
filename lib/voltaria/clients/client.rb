@@ -536,6 +536,132 @@ module Voltaria
         end
       end
 
+      # Retrieve the counterparties of a specific client, e.g. its debtors or installers.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :client_id
+      # @option params [Integer, nil] :page
+      # @option params [Integer, nil] :page_size
+      # @option params [String, nil] :order_by
+      # @option params [String, nil] :q
+      #
+      # @return [Voltaria::Types::PaginatedResponseClientCounterpartyResponse]
+      def list_client_counterparties(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        query_param_names = %i[page page_size order_by q]
+        query_params = {}
+        query_params["page"] = params[:page] if params.key?(:page)
+        query_params["page_size"] = params[:page_size] if params.key?(:page_size)
+        query_params["order_by"] = params[:order_by] if params.key?(:order_by)
+        query_params["q"] = params[:q] if params.key?(:q)
+        params = params.except(*query_param_names)
+
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v2/clients/#{URI.encode_uri_component(params[:client_id].to_s)}/counterparties",
+          query: query_params,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::PaginatedResponseClientCounterpartyResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Add a counterparty to a specific client. It starts with your default counterparty status.
+      #
+      # @param request_options [Hash]
+      # @param params [Voltaria::Clients::Types::ClientCounterpartyCreatePayload]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :client_id
+      #
+      # @return [Voltaria::Types::ClientCounterpartyResponse]
+      def create_client_counterparty(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        request_data = Voltaria::Clients::Types::ClientCounterpartyCreatePayload.new(params).to_h
+        non_body_param_names = ["client_id"]
+        body = request_data.except(*non_body_param_names)
+
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "v2/clients/#{URI.encode_uri_component(params[:client_id].to_s)}/counterparties",
+          body: body,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::ClientCounterpartyResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Update the details of a counterparty of a specific client.
+      #
+      # @param request_options [Hash]
+      # @param params [Voltaria::Clients::Types::ClientCounterpartyUpdatePayload]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :client_id
+      # @option params [String] :counterparty_id
+      #
+      # @return [Voltaria::Types::ClientCounterpartyResponse]
+      def update_client_counterparty(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        request_data = Voltaria::Clients::Types::ClientCounterpartyUpdatePayload.new(params).to_h
+        non_body_param_names = %w[client_id counterparty_id]
+        body = request_data.except(*non_body_param_names)
+
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "PATCH",
+          path: "v2/clients/#{URI.encode_uri_component(params[:client_id].to_s)}/counterparties/#{URI.encode_uri_component(params[:counterparty_id].to_s)}",
+          body: body,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::ClientCounterpartyResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
       # Retrieve detailed information for a specific client using their client ID.
       #
       # @param request_options [Hash]
@@ -641,6 +767,52 @@ module Voltaria
         code = response.code.to_i
         if code.between?(200, 299)
           Voltaria::Types::PaginatedResponseChecklistSummaryPartnerResponse.load(response.body)
+        else
+          error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # Retrieve the counterparties of all your clients, e.g. their debtors or installers, with each client's name.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [Integer, nil] :page
+      # @option params [Integer, nil] :page_size
+      # @option params [String, nil] :order_by
+      # @option params [String, nil] :q
+      #
+      # @return [Voltaria::Types::PaginatedResponseClientCounterpartyWithClientResponse]
+      def list_all_client_counterparties(request_options: {}, **params)
+        params = Voltaria::Internal::Types::Utils.normalize_keys(params)
+        query_param_names = %i[page page_size order_by q]
+        query_params = {}
+        query_params["page"] = params[:page] if params.key?(:page)
+        query_params["page_size"] = params[:page_size] if params.key?(:page_size)
+        query_params["order_by"] = params[:order_by] if params.key?(:order_by)
+        query_params["q"] = params[:q] if params.key?(:q)
+        params.except(*query_param_names)
+
+        request = Voltaria::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v2/client-counterparties",
+          query: query_params,
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Voltaria::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Voltaria::Types::PaginatedResponseClientCounterpartyWithClientResponse.load(response.body)
         else
           error_class = Voltaria::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

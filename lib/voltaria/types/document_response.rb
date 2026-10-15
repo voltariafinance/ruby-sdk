@@ -8,6 +8,7 @@ module Voltaria
       field :file_name, -> { String }, optional: false, nullable: false
       field :file_type, -> { String }, optional: false, nullable: false
       field :client_id, -> { String }, optional: true, nullable: false
+      field :client_counterparty_id, -> { String }, optional: true, nullable: false
       field :file_url, -> { String }, optional: true, nullable: false
       field :loan_id, -> { String }, optional: true, nullable: false
       field :installment_id, -> { String }, optional: true, nullable: false

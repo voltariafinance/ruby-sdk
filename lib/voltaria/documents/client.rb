@@ -74,6 +74,7 @@ module Voltaria
       # @option request_options [Hash{String => Object}] :additional_body_parameters
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String, nil] :client_id
+      # @option params [String, nil] :client_counterparty_id
       # @option params [String, nil] :loan_id
       # @option params [String, nil] :installment_id
       # @option params [String, nil] :waterfall_id

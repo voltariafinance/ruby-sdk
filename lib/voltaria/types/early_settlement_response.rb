@@ -6,7 +6,7 @@ module Voltaria
       field :loan_id, -> { String }, optional: false, nullable: false
       field :settlement_date, -> { String }, optional: false, nullable: false
       field :settlement_amount, -> { String }, optional: false, nullable: false
-      field :settlement_irr, -> { String }, optional: false, nullable: false
+      field :settlement_irr, -> { String }, optional: false, nullable: true
       field :original_irr, -> { String }, optional: true, nullable: false
       field :minimum_fee, -> { String }, optional: true, nullable: false
     end
