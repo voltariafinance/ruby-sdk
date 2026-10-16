@@ -20,6 +20,7 @@ module Voltaria
       field :early_settlement_date, -> { String }, optional: true, nullable: false
       field :early_settlement_amount, -> { String }, optional: true, nullable: false
       field :repayment_method, -> { Voltaria::Types::LoanRepaymentMethodEnum }, optional: false, nullable: false
+      field :client_counterparty_id, -> { String }, optional: true, nullable: false
       field :data, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
       field :client, -> { Voltaria::Types::ClientBaseInfo }, optional: false, nullable: false
       field :outstanding_principal, -> { String }, optional: true, nullable: false
