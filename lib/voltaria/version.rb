@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Voltaria
-  VERSION = "2.49.0"
+  VERSION = "2.49.1"
 end
