@@ -5,6 +5,8 @@ module Voltaria
     class LoanInstallmentCreatePayload < Internal::Types::Model
       field :expected_repayment_at, -> { String }, optional: false, nullable: false
       field :amount, -> { Voltaria::Types::LoanInstallmentCreatePayloadAmount }, optional: false, nullable: false
+      field :principal, -> { Voltaria::Types::LoanInstallmentCreatePayloadPrincipal }, optional: true, nullable: false
+      field :interest, -> { Voltaria::Types::LoanInstallmentCreatePayloadInterest }, optional: true, nullable: false
     end
   end
 end

@@ -7,6 +7,7 @@ module Voltaria
 
       PMT = "pmt"
       CONSTANT_PRINCIPAL = "constant_principal"
+      CUSTOM = "custom"
     end
   end
 end
