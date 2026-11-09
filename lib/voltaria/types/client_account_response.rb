@@ -17,6 +17,7 @@ module Voltaria
       field :address, -> { Voltaria::Types::AccountAddress }, optional: true, nullable: false
       field :status, -> { Voltaria::Types::AccountStatusEnum }, optional: false, nullable: false
       field :cop_status, -> { Voltaria::Types::CopStatusEnum }, optional: true, nullable: false
+      field :bank_name, -> { String }, optional: true, nullable: false
       field :created_at, -> { String }, optional: false, nullable: false
     end
   end
