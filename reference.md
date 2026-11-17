@@ -1769,7 +1769,7 @@ client.sandbox.update_client(client_id: "client_id")
 <dl>
 <dd>
 
-Update the status of a specific loan using its unique loan ID.
+Update the status of a specific loan using its unique loan ID. Moving a loan to sold, restructured or default needs its sale, restructure or default date in the same request.
 </dd>
 </dl>
 </dd>
@@ -1808,6 +1808,30 @@ client.sandbox.update_loan(loan_id: "loan_id")
 <dd>
 
 **status:** `Voltaria::Types::LoanStatusEnum` — The status of the loan. One of the following: `pending, overdue, active, default, sold, restructured, repaid, pre_approved, rejected, inactive`. Use the delete loan endpoint to delete a loan.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sold_at:** `String` — The date the loan was sold. Required when the status changes to `sold`; can't be later than today or earlier than the loan date
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**restructured_at:** `String` — The date the loan was restructured. Required when the status changes to `restructured`; can't be later than today or earlier than the loan date
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**defaulted_at:** `String` — The date the loan defaulted. Required when the status changes to `default`; can't be later than today or earlier than the loan date
     
 </dd>
 </dl>

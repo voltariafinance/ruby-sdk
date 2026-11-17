@@ -49,7 +49,8 @@ module Voltaria
         end
       end
 
-      # Update the status of a specific loan using its unique loan ID.
+      # Update the status of a specific loan using its unique loan ID. Moving a loan to sold, restructured or default
+      # needs its sale, restructure or default date in the same request.
       #
       # @param request_options [Hash]
       # @param params [Voltaria::Sandbox::Types::LoanUpdateSandbox]
